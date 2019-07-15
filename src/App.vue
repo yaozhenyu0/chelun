@@ -1,49 +1,42 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <!-- <div id="nav">
+      <router-link to="/"></router-link>
+      <router-link to="/about"></router-link>
     </div>
-    <router-view />
+    <router-view />-->
+
+    <Home></Home>
   </div>
 </template>
 <script lang="ts">
-import Vue from "vue";
 import request from "./utils/request";
 import { mapState, mapActions } from "vuex";
-export default Vue.extend({
-  data() {
-    return {
-      home: "6666"
-    };
-  },
-  created() {
-    console.log(this);
-    this.pageList();
-  },
-  methods: {
-    ...mapActions("index", ["pageList"])
+import { Component, Vue } from "vue-property-decorator";
+import Home from "@/views/Home/Home.vue";
+@Component({
+  components: {
+    Home
   }
-});
+})
+export default class Content extends Vue {}
 </script>
 
 
 <style lang="scss">
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+* {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-decoration: none;
+  outline: none;
 }
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+body,
+html,
+#app {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 </style>
