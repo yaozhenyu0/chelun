@@ -21,11 +21,9 @@ export default class Home extends Vue {
 }
 </script>
 
-<style>
+<style lang="scss">
 .home {
   width: 100%;
   height: 100%;
-}
-content {
 }
 </style>

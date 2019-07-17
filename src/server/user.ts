@@ -9,3 +9,38 @@ export function homePageList() {
     }
   });
 }
+
+// 车型数据
+export function pratePageList(options: any) {
+  return request.get(`http://baojia.chelun.com/v2-car-getMakeListByMasterBrandId.html?MasterID=${options.MasterID}&_1563244629855=${options._1563244629855}`)
+}
+
+// 跳转车辆详情
+export function goPrateList(options: any) {
+  return request.get(`http://baojia.chelun.com/v2-car-getInfoAndListById.html?SerialID=${options.SerialID}&_1563281918512=${options._1563244629855}`)
+}
+
+// 询问底价获取地理位置
+export function goInquiryPricesCityData() {
+  return request.get(`http://baojia.chelun.com/location-client.html`)
+}
+
+// 询问底价商铺页面
+export function goInquiryPricesData(options: any) {
+  return request.get(`http://baojia.chelun.com/v2-dealer-alllist.html?carId=${options.carId}&cityId=${options.cityId}`)
+}
+
+//获取省地址
+export function requestProvince() {
+  return request.get(`http://baojia.chelun.com/v1-city-alllist.html`)
+}
+
+//获取市区
+export function cityshiData(options: any) {
+  return request.get(`http://baojia.chelun.com/v1-city-alllist.html?provinceid=${options.provinceid}`)
+}
+
+//重新获取具体位置
+export function specificLocationData(options: any) {
+  return request.get(`http://baojia.chelun.com/v2-dealer-alllist.html?carId=${options.carId}&cityId=${options.cityId}`)
+}
