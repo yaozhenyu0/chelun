@@ -44,3 +44,18 @@ export function cityshiData(options: any) {
 export function specificLocationData(options: any) {
   return request.get(`http://baojia.chelun.com/v2-dealer-alllist.html?carId=${options.carId}&cityId=${options.cityId}`)
 }
+
+// 获取车型所有图片
+export function requAllPhotoList(options: any) {
+  return request.get(`http://baojia.chelun.com/v2-car-getImageList.html?SerialID=${options.SerialID}`)
+}
+
+// 获取 外观 内饰 空间等图片
+export function allImgsList(options: any) {
+  return request.get(`http://baojia.chelun.com/v2-car-getCategoryImageList.html?SerialID=${options.SerialID}&ImageID=${options.ImageID}&Page=${options.Page}&PageSize=${options.PageSize}`)
+}
+
+// 获取所有颜色
+export function allColorsList(options: any) {
+  return request.get(`http://baojia.chelun.com/v2-car-getModelImageYearColor.html?SerialID=${options.SerialID}`)
+}

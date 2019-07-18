@@ -40,7 +40,6 @@ export default Vue.extend({
       hideFlag: true
     };
   },
-  // onShow() {},
   computed: {
     ...mapState({
       contListDatas: (state: any) => state.index.contDataList,
@@ -93,12 +92,14 @@ export default Vue.extend({
   height: auto;
   display: flex;
   flex-direction: column;
-  h3 {
+  > h3 {
     width: 100%;
-    height: 30px;
+    height: 20px;
     background: #f0f0f0;
     text-indent: 1rem;
-    line-height: 30px;
+    line-height: 20px;
+    color: #ccc;
+    font-size: 15px;
   }
 }
 .contList {
@@ -138,12 +139,12 @@ export default Vue.extend({
   display: flex;
   flex-direction: column;
   z-index: 111;
+  overflow: auto;
   .prateList_con {
     width: 100%;
     height: auto;
     display: flex;
     flex-direction: column;
-    overflow: auto;
     h3 {
       width: 100%;
       height: 36px;

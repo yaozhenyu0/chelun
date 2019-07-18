@@ -1,4 +1,4 @@
-import { homePageList, pratePageList, goPrateList, goInquiryPricesCityData, goInquiryPricesData, requestProvince, cityshiData, specificLocationData } from '../../server/user'
+import { homePageList, pratePageList, goPrateList, goInquiryPricesCityData, goInquiryPricesData, requestProvince, cityshiData, specificLocationData, requAllPhotoList, allImgsList, allColorsList } from '../../server/user'
 const state = {
   title: '',
   contDataList: {},
@@ -8,7 +8,10 @@ const state = {
   goInquiryPricesDataList: [],
   requestProvinceData: [],
   cityshiDataList: [],
-  specificLocationDataList: []
+  specificLocationDataList: [],
+  requAllPhotoDataList: [],
+  allImgsDataList: [],
+  allColorsDataList: []
 }
 
 const actions = {
@@ -42,7 +45,7 @@ const actions = {
   // 跳转车辆详情
   async goPrate({ commit }: any, options: any) {
     let data = await goPrateList(options)
-    // console.log(data, 'data........')
+    console.log(data, 'data........')
     commit('goPrateDataList', data.data)
     return data
   },
@@ -56,12 +59,21 @@ const actions = {
 
   // 询问底价商铺页面
   async goInquiryPricesDatas({ commit }: any, options: any) {
-    let data = await goInquiryPricesData(options)
-    data.data.list.forEach((item: any, ind: any) => {
-      item.pitch = false
-    })
+    let data: any = await goInquiryPricesData(options)
+    // console.log(data, '.....................................')
+    if (data.code == 1) {
+      data.data.list.forEach((item: any, ind: any) => {
+        item.pitch = false
+      })
+
+      data.data.nearbys.forEach((item: any, ind: any) => {
+        item.pitch = false
+      })
+      commit('goInquiryPricesDataList', data.data)
+    }
+
     // console.log(data, ';;;;;;;;;;;;;;;;')
-    commit('goInquiryPricesDataList', data.data)
+
   },
 
   //请求地址
@@ -80,9 +92,38 @@ const actions = {
 
   //重新获取具体位置
   async specificLocation({ commit }: any, options: any) {
-    let data = await specificLocationData(options)
-    console.log(data, options)
+    let data: any = await specificLocationData(options)
+    if (data.code == 1) {
+      data.data.list.forEach((item: any, ind: any) => {
+        item.pitch = false
+      })
+      data.data.nearbys.forEach((item: any, ind: any) => {
+        item.pitch = false
+      })
+    }
     commit('goInquiryPricesDataList', data.data)
+  },
+
+  // 获取车型所有图片
+  async requAllPhoto({ commit }: any, options: any) {
+    let data: any = await requAllPhotoList(options)
+
+    commit('requAllPhotoData', data.data)
+  },
+
+  //获取外观  内饰  空间等全部图片
+  async allImgs({ commit }: any, options: any) {
+    let data: any = await allImgsList(options)
+    // console.log(data)
+    // console.log(options)
+    commit('allImgsData', data.data)
+  },
+
+  //获取所有颜色
+  async allColors({ commit }: any, options: any) {
+    let data: any = await allColorsList(options)
+    commit('allColorsData', data.data)
+    console.log(data)
   }
 }
 
@@ -103,7 +144,7 @@ const mutations = {
   // 跳转车辆详情
   goPrateDataList(state: any, actions: any) {
     state.goPrateDataLists = actions
-    // console.log(actions)
+    console.log(actions)
   },
 
   //询问底价获取地理位置
@@ -132,6 +173,23 @@ const mutations = {
   // specificData(state: any, actions: any) {
   //   state.specificLocationDataList = actions
   // }
+
+  // 获取车型所有图片
+  requAllPhotoData(state: any, actions: any) {
+    state.requAllPhotoDataList = actions
+    console.log(actions)
+  },
+
+  //获取外观  内饰  空间等全部图片
+  allImgsData(state: any, actions: any) {
+    state.allImgsDataList = actions
+  },
+
+  //获取所有颜色
+  allColorsData(state: any, actions: any) {
+    state.allColorsDataList = actions
+    console.log(actions)
+  }
 }
 
 export default {

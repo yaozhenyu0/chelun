@@ -53,6 +53,25 @@
         </div>
       </div>
       <p>根据您所在城市，同时为您匹配附近优质经销商，货比三家，才有好价</p>
+      <div
+        class="wrap_dealer_con"
+        v-for="(item,index) in goInquiryPricesDataList.nearbys"
+        :key="index"
+      >
+        <div class="wrap_dealer_con_l" @click="wrapPitchs(item)">
+          <div :class="item.pitch?'addPitch':'wrap_dealer_con_l_y'">✔</div>
+        </div>
+        <div class="wrap_dealer_con_r">
+          <p>
+            <span class="wrap_dealer_con_r_title">{{item.dealerShortName}}</span>
+            <span class="wrap_dealer_con_r_c">{{item.promotePrice}}万</span>
+          </p>
+          <p>
+            <span class="wrap_dealer_con_r_address">{{item.address}}</span>
+            <span>售{{item.saleRange}}</span>
+          </p>
+        </div>
+      </div>
     </div>
     <div v-if="cut" class="province">
       <p class="location">自动定位</p>
@@ -109,6 +128,12 @@ export default Vue.extend({
     // 选中
     wrapPitch(item: any) {
       item.pitch = !item.pitch;
+      // console.log(this.goInquiryPricesDataList, item);
+    },
+    // 选中
+    wrapPitchs(item: any) {
+      item.pitch = !item.pitch;
+      console.log(this.goInquiryPricesDataList, item);
     },
     // 地址
     requCity() {
@@ -287,9 +312,9 @@ export default Vue.extend({
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid rgb(238, 235, 235);
-      .wrap_dealer_con_l {
-        width: 14px;
-        height: 14px;
+      .wrap_dealer_con_l_y {
+        width: 12px;
+        height: 12px;
         border-radius: 50%;
         border: 2px solid #ccc;
         color: #fff;
@@ -298,12 +323,12 @@ export default Vue.extend({
         font-size: 12px;
       }
       .addPitch {
-        width: 14px;
-        height: 14px;
+        width: 16px;
+        height: 16px;
         border-radius: 50%;
         color: #fff;
         text-align: center;
-        line-height: 14px;
+        line-height: 18px;
         font-size: 12px;
         background: #3aacff;
       }

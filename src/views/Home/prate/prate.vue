@@ -4,8 +4,8 @@
       <!--  v-for="(item,ind) in goPrateDataList" :key="ind"   -->
       <div class="wrap_cont_top">
         <div class="wrap_cont_top_img">
-          <img :src="goPrateDataList.CoverPhoto" alt />
-          <span>张图片</span>
+          <img :src="goPrateDataList.CoverPhoto" alt @click="allPhoto" />
+          <span>{{goPrateDataList.pic_group_count}}张图片</span>
         </div>
       </div>
       <div class="wrap_cont_price">
@@ -65,7 +65,11 @@ export default Vue.extend({
     })
   },
   methods: {
-    ...mapActions("index", ["goInquiryPricesCity", "goInquiryPricesDatas"]),
+    ...mapActions("index", [
+      "goInquiryPricesCity",
+      "goInquiryPricesDatas",
+      "requAllPhoto"
+    ]),
 
     goInquiryPrice(item: any) {
       console.log(item);
@@ -74,6 +78,13 @@ export default Vue.extend({
         cityId: this.goInquiryPricesCityDatas.CityID
       });
       this.$router.push({ path: `/inquiryPrice` });
+    },
+    allPhoto() {
+      // console.log(1);
+      this.requAllPhoto({
+        SerialID: this.goPrateDataList.SerialID
+      });
+      this.$router.push({ path: `/allPhoto` });
     }
   }
 });
